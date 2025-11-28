@@ -12,7 +12,6 @@ class SendgridMailService(
 ): MailService{
     @CircuitBreaker(name = "sendgrid")
     override fun sendMail(userId: Long, from: String, to: String, content: String) {
-        throw RuntimeException("Disastered")
         mailSentLogRepository.save(
             MailSentLog(
                 id = null,

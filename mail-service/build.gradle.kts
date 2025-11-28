@@ -11,9 +11,9 @@ version = "0.0.1-SNAPSHOT"
 description = "메일 서비스 비율 조절기"
 
 java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(25)
-	}
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
 }
 
 repositories {
@@ -43,8 +43,6 @@ dependencies {
 
 kotlin {
     compilerOptions {
-        // Align Kotlin JVM target with Java toolchain (Java 25) to avoid mismatch
-        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_25)
         freeCompilerArgs.addAll("-Xjsr305=strict", "-Xannotation-default-target=param-property")
     }
 }

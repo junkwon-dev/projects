@@ -38,24 +38,6 @@ class CircuitBreakerService(
         return cb.toInfo()
     }
 
-    fun recordSuccess(name: String): CircuitBreakerInfo {
-        val cb = registry.circuitBreaker(name)
-        // Record a success via programmatic decoration
-        cb.decorateRunnable { /* no-op indicates success */ }.run()
-        return cb.toInfo()
-    }
-
-    fun recordFailure(name: String): CircuitBreakerInfo {
-        val cb = registry.circuitBreaker(name)
-        // Record a failure via programmatic decoration that throws
-        try {
-            cb.decorateRunnable { throw RuntimeException("probe failure") }.run()
-        } catch (_: Exception) {
-            // swallow for API usability
-        }
-        return cb.toInfo()
-    }
-
     private fun CircuitBreaker.toInfo(): CircuitBreakerInfo {
         val metrics = this.metrics
         val cfg = this.circuitBreakerConfig

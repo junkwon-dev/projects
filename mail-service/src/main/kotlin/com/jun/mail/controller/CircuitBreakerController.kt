@@ -22,12 +22,4 @@ class CircuitBreakerController(
     @ResponseStatus(HttpStatus.OK)
     fun transition(@PathVariable name: String, @RequestBody req: TransitionRequest) =
         circuitBreakerService.transition(name, req.state)
-
-    @PostMapping("/{name}/probe/success")
-    @ResponseStatus(HttpStatus.OK)
-    fun probeSuccess(@PathVariable name: String) = circuitBreakerService.recordSuccess(name)
-
-    @PostMapping("/{name}/probe/failure")
-    @ResponseStatus(HttpStatus.OK)
-    fun probeFailure(@PathVariable name: String) = circuitBreakerService.recordFailure(name)
 }

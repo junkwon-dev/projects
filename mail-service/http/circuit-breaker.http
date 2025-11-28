@@ -1,0 +1,32 @@
+@baseUrl = http://localhost:8080
+@name = sendgrid
+
+### circuit breaker 리스트 조회
+GET {{baseUrl}}/circuit-breakers
+
+### circuit breaker 상세 조회
+GET {{baseUrl}}/circuit-breakers/{{name}}
+
+### 특정 circuit breker 개방
+POST {{baseUrl}}/circuit-breakers/{{name}}/transition
+Content-Type: application/json
+
+{
+  "state": "OPEN"
+}
+
+### 특정 circuit breaker HALF_OPEN
+POST {{baseUrl}}/circuit-breakers/{{name}}/transition
+Content-Type: application/json
+
+{
+  "state": "HALF_OPEN"
+}
+
+### 특정 circuit breaker 단락
+POST {{baseUrl}}/circuit-breakers/{{name}}/transition
+Content-Type: application/json
+
+{
+  "state": "CLOSED"
+}

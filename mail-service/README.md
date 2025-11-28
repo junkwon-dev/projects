@@ -7,20 +7,21 @@
   - Feature Flag를 통한 런타임 구성 변경(비율 조정, 토글)
   - 장애 발생 시 재시도 및 다른 서비스로 폴백
 - 로컬 실행
-  - 내장 H2 인메모리 DB를 사용하므로, 추가 DB 설치 없이 즉시 실행 가능
+  - 내장 H2 인메모리 DB를 사용하므로, 추가 DB 설치 없이 즉시 실행 가능합니다.
   - Gradle Wrapper로 실행: `./gradlew bootRun`
 
 ---
 
 ## 기술 스택(Detected Stack)
 - 언어: Kotlin 2.2.10
-- 프레임워크: Spring Boot 4.0.0-M3 (WebMVC, Data JPA)
+- 프레임워크: Spring Boot 4.0.0
 - 재시도: Spring Retry
+- 서킷브레이크: Resilience4j
 - 데이터베이스: H2 인메모리 DB (JPA/Hibernate)
 - 빌드/패키지 관리자: Gradle (Kotlin DSL)
-- JDK: Java 25 Toolchain
+- JDK: Java 21
 
-참고 파일: `build.gradle.kts`, `settings.gradle.kts`, `src/main/resources/application.properties`
+참고 파일: `build.gradle.kts`, `src/main/resources/application.properties`
 
 ## 엔트리 포인트(Entry Points)
 - 애플리케이션 메인: `src/main/kotlin/com/jun/mail/MailApplication.kt`

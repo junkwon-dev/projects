@@ -39,8 +39,8 @@ Content-Type: application/json
 Content-Length: 107
 
 {
-  "from": "jun@doodlin.co.kr",
-  "to": "to-jun@doodlin.co.kr",
+  "from": "jun@naver.co.kr",
+  "to": "to-jun@naver.co.kr",
   "userId": 3,
   "content": "ZZ"
 }
@@ -53,9 +53,9 @@ Content-Type: application/json
 Content-Length: 107
 
 {
-  "from": "jun@doodlin.co.kr",
-  "to": "to-jun@doodlin.co.kr",
-  "userId": 3,
+  "from": "jun@naver.co.kr",
+  "to": "to-jun@naver.co.kr",
+  "userId": 1,
   "content": "ZZ"
 }
 
