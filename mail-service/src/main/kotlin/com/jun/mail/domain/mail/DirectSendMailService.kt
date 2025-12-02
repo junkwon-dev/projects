@@ -1,16 +1,21 @@
 package com.jun.mail.domain.mail
 
+import com.jun.mail.application.MailingApplication
+import com.jun.mail.application.exceptions.BadGatewayException
 import com.jun.mail.domain.entity.MailSentLog
 import com.jun.mail.domain.entity.MailServiceType
 import com.jun.mail.infrastructure.MailSentLogRepository
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 
 @Service("directSend")
 class DirectSendMailService(
     private val mailSentLogRepository: MailSentLogRepository
-): MailService{
-    @CircuitBreaker(name = "directSend")
+) : MailService {
+    private val logger = LoggerFactory.getLogger(DirectSendMailService::class.java)
+
+    @CircuitBreaker(name = "directSend", fallbackMethod = "fallbackSendMail")
     override fun sendMail(userId: Long, from: String, to: String, content: String) {
         mailSentLogRepository.save(
             MailSentLog(
@@ -19,5 +24,12 @@ class DirectSendMailService(
             )
         )
         return
+    }
+
+    private fun fallbackSendMail(
+        userId: Long, from: String, to: String, content: String, error: Throwable
+    ) {
+        logger.warn("direct mail service in trouble, ${error.message}")
+        throw BadGatewayException("다이렉트 메일 서비스 장애가 발생했습니다.")
     }
 }
